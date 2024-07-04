@@ -11,7 +11,6 @@ public static class Sounds
     public static SoundBuffer HitSoundBuffer = null;
     public static Sound Hit = null;
 
-
     public static SoundBuffer MenuMusicSoundBuffer = null;
     public static Sound MenuMusic = null;
 

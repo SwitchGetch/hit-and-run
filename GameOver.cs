@@ -7,7 +7,7 @@ public static class GameOver
     {
         Window.RenderWindow.MouseButtonPressed += Event.OnGameOverMouseButtonPressed;
 
-        Sounds.GameOverMusic.Play();
+        //Sounds.GameOverMusic.Play();
 
         Font Font = new Font("Fonts/impact.ttf");
         Text Text = new Text() 

@@ -19,6 +19,8 @@ public static class Window
         RenderWindow = new RenderWindow(new VideoMode(X, Y), "HIT AND RUN");
         Size = new Vector2f(X, Y);
 
+        RenderWindow.SetFramerateLimit(60);
+
         RenderWindow.Closed += Event.OnClose;
     }
 }
@@ -41,8 +43,6 @@ public static class Event
     {
         if (Mouse.IsButtonPressed(Mouse.Button.Left))
         {
-            Sounds.Shot.Play();
-
             Bullets.New();
         }
     }
@@ -51,12 +51,14 @@ public static class Event
     {
         if (Buttons.YES.CheckCollisionWithMouse())
         {
-            Sounds.ButtonPress.Play();
+            //Sounds.ButtonPress.Play();
 
             Window.Current = CurrentWindow.Menu;
         }
         else if (Buttons.NO.CheckCollisionWithMouse())
         {
+            Sounds.Shot.Stop();
+            Sounds.Hit.Stop();
             Sounds.GameOverMusic.Stop();
 
             Window.RenderWindow.Close();

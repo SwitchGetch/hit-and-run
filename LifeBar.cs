@@ -35,7 +35,7 @@ public static class LifeBar
         {
             Enemy enemy = Enemies.AllEnemies[i];
 
-            Ratio = (float)enemy.HP /enemy.MaxHP;
+            Ratio = (float)enemy.HP / Enemies.MaxHP;
             Red = Convert.ToByte(255 * (1 - Ratio));
             Green = Convert.ToByte(255 * Ratio);
 
@@ -47,7 +47,7 @@ public static class LifeBar
 
             FullBar.FillColor = new Color(Red, Green, 0);
 
-            if (enemy.HP < enemy.MaxHP)
+            if (enemy.HP < Enemies.MaxHP)
             {
                 Window.RenderWindow.Draw(EmptyBar);
                 Window.RenderWindow.Draw(FullBar);
