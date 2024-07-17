@@ -1,12 +1,11 @@
 ﻿using SFML.Graphics;
 using SFML.System;
-using SFML.Window;
 
 public static class LifeBar
 {
     public static void Draw()
     {
-        RectangleShape EmptyBar = new RectangleShape() { FillColor = Color.Black };
+        RectangleShape EmptyBar = new RectangleShape() { FillColor = Color.Black, OutlineColor = Color.White, OutlineThickness = 5 };
         RectangleShape FullBar = new RectangleShape();
         float Ratio = (float)Player.HP / Player.MaxHP;
         byte Red = Convert.ToByte(255 * (1 - Ratio));
@@ -21,7 +20,6 @@ public static class LifeBar
         FullBar.Position = Player.Shape.Position - new Vector2f(0, Player.Shape.Radius);
 
         FullBar.FillColor = new Color(Red, Green, 0);
-        //FullBar.FillColor = Color.Green;
 
         if (Player.HP < Player.MaxHP)
         {
@@ -35,7 +33,7 @@ public static class LifeBar
         {
             Enemy enemy = Enemies.AllEnemies[i];
 
-            Ratio = (float)enemy.HP / Enemies.MaxHP;
+            Ratio = (float)enemy.HP / enemy.MaxHP;
             Red = Convert.ToByte(255 * (1 - Ratio));
             Green = Convert.ToByte(255 * Ratio);
 
@@ -47,7 +45,7 @@ public static class LifeBar
 
             FullBar.FillColor = new Color(Red, Green, 0);
 
-            if (enemy.HP < Enemies.MaxHP)
+            if (enemy.HP < enemy.MaxHP)
             {
                 Window.RenderWindow.Draw(EmptyBar);
                 Window.RenderWindow.Draw(FullBar);

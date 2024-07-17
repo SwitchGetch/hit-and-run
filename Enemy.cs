@@ -6,9 +6,9 @@ public class Enemy
     public CircleShape Shape = new CircleShape()
     {
         Radius = Config.EnemyShapeRadius,
-        FillColor = Color.Black,
+        FillColor = Color.Red,
         OutlineColor = Color.White,
-        OutlineThickness = 1
+        OutlineThickness = 5
     };
 
     public Vector2f Position
@@ -18,6 +18,7 @@ public class Enemy
     }
 
     public int HP = Enemies.MaxHP;
+    public int MaxHP = Enemies.MaxHP;
 
     public Vector2f Direction = new Vector2f();
 }
@@ -33,29 +34,7 @@ public static class Enemies
 
     public static void New()
     {
-        //if (AllEnemies.Count == 0)
-        //{
-        //    Player.WaveCount++;
-
-        //    for (int i = 0; i < MaxEnemyCount; i++)
-        //    {
-        //        Random random = new Random();
-        //        Enemy enemy = new Enemy();
-        //        int temp = random.Next(0, 4);
-
-        //        switch (temp) // set random position to enemy
-        //        {
-        //            case 0: enemy.Position = new Vector2f(random.Next(0, (int)Window.Size.X), -enemy.Shape.Radius); break;
-        //            case 1: enemy.Position = new Vector2f(-enemy.Shape.Radius, random.Next(0, (int)Window.Size.Y)); break;
-        //            case 2: enemy.Position = new Vector2f(Window.Size.X + enemy.Shape.Radius, random.Next(0, (int)Window.Size.Y)); break;
-        //            case 3: enemy.Position = new Vector2f(random.Next(0, (int)Window.Size.X), Window.Size.Y + enemy.Shape.Radius); break;
-        //        }
-
-        //        AllEnemies.Add(enemy);
-        //    }
-        //}
-
-        if (AllEnemies.Count < MaxEnemyCount)
+        while (AllEnemies.Count < MaxEnemyCount)
         {
             Random random = new Random();
             Enemy enemy = new Enemy();
@@ -87,7 +66,7 @@ public static class Enemies
                 {
                     Player.HP -= Damage;
 
-                    //Sounds.Hit.Play();
+                    if (Config.PlaySound) Sounds.Hit.Play();
 
                     AllEnemies.RemoveAt(i);
 

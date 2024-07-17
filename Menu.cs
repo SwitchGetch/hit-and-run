@@ -7,7 +7,7 @@ public static class Menu
     {
         Window.RenderWindow.MouseButtonPressed += Event.OnMenuMouseButtonPressed;
 
-        //Sounds.MenuMusic.Play();
+        if (Config.PlaySound) Sounds.MenuMusic.Play();
 
         Font Font = new Font("Fonts/impact.ttf");
         Text Text = new Text()

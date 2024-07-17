@@ -7,9 +7,9 @@ public static class Player
     public static CircleShape Shape = new CircleShape()
     {
         Radius = Config.PlayerShapeRadius,
-        FillColor = Color.White,
-        OutlineColor = Color.Black,
-        OutlineThickness = 1,
+        FillColor = Color.Blue,
+        OutlineColor = Color.White,
+        OutlineThickness = 5
     };
 
     public static Vector2f Position
@@ -45,7 +45,6 @@ public static class Player
         if (Keyboard.IsKeyPressed(Keyboard.Key.A)) Move.X--;
         if (Keyboard.IsKeyPressed(Keyboard.Key.S)) Move.Y++;
         if (Keyboard.IsKeyPressed(Keyboard.Key.D)) Move.X++;
-        if (Keyboard.IsKeyPressed(Keyboard.Key.Space)) Bullets.New();
 
         if (Move != new Vector2f())
         {

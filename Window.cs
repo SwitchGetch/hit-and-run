@@ -33,7 +33,7 @@ public static class Event
     {
         if (Buttons.START.CheckCollisionWithMouse())
         {
-            Sounds.ButtonPress.Play();
+            if (Config.PlaySound) Sounds.ButtonPress.Play();
 
             Window.Current = CurrentWindow.Game;
         }
@@ -51,14 +51,12 @@ public static class Event
     {
         if (Buttons.YES.CheckCollisionWithMouse())
         {
-            //Sounds.ButtonPress.Play();
+            if (Config.PlaySound) Sounds.ButtonPress.Play();
 
             Window.Current = CurrentWindow.Menu;
         }
         else if (Buttons.NO.CheckCollisionWithMouse())
         {
-            Sounds.Shot.Stop();
-            Sounds.Hit.Stop();
             Sounds.GameOverMusic.Stop();
 
             Window.RenderWindow.Close();

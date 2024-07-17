@@ -7,8 +7,8 @@ public class Bullet
     {
         Radius = Config.BulletShapeRadius,
         FillColor = Color.Yellow,
-        OutlineColor = Color.Red,
-        OutlineThickness = 1
+        OutlineColor = Color.White,
+        OutlineThickness = 5
     };
 
     public Vector2f Position
@@ -26,11 +26,13 @@ public static class Bullets
 
     public static int Speed = Config.BulletSpeed;
     public static int Damage = Config.BulletDamage;
-    public static bool IsSpectral = Config.IsBulletSpectral;
+    public static bool IsSpectral = Config.Piercing;
 
     public static void New()
     {
-        if (Line.Direction != new Vector2f())
+        Line.DefineDirection();
+
+        if (Line.Directions.Count == Line.DirectionCount)
         {
             for (int i = 0; i < Line.DirectionCount; i++)
             {
@@ -38,7 +40,7 @@ public static class Bullets
             }
         }
 
-        //Sounds.Shot.Play();
+        if (Config.PlaySound) Sounds.Shot.Play();
     }
 
     public static void Move()
@@ -69,6 +71,8 @@ public static class Bullets
 
     private static bool CheckForCollisionWithEnemies(int Index)
     {
+        bool Hit = false;
+
         for (int i = 0; i < Enemies.AllEnemies.Count; i++)
         {
             if (Vector.Length(AllBullets[Index].Position, Enemies.AllEnemies[i].Position) <
@@ -76,7 +80,9 @@ public static class Bullets
             {
                 Enemies.AllEnemies[i].HP -= Damage;
 
-                //Sounds.Hit.Play();
+                Hit = true;
+
+                if (Config.PlaySound) Sounds.Hit.Play();
 
                 if (Enemies.AllEnemies[i].HP <= 0)
                 {
@@ -84,14 +90,10 @@ public static class Bullets
 
                     Player.KilledEnemiesCount++;
                 }
-
-                i--;
-
-                return true;
             }
         }
 
-        return false;
+        return Hit;
     }
 
     public static void Draw()

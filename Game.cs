@@ -19,37 +19,42 @@ public static class Game
     {
         Window.RenderWindow.MouseButtonPressed += Event.OnGameMouseButtonPressed;
 
-        //Sounds.GameMusic.Play();
+        if (Config.PlaySound) Sounds.GameMusic.Play();
 
         NewGame(); // reset in-game parameters
 
         Font Font = new Font("Fonts/impact.ttf");
-        Text Text = new Text() { Font = Font };
+        Text Text = new Text()
+        {
+            Font = Font,
+            FillColor = Color.Black,
+            OutlineColor = Color.White,
+            OutlineThickness = 5
+        };
 
         while (Window.RenderWindow.IsOpen && Window.Current == CurrentWindow.Game)
         {
             Window.RenderWindow.DispatchEvents();
 
-            Window.RenderWindow.Clear(new Color(56, 207, 209));
+            Window.RenderWindow.Clear();
 
             Enemies.New();
-            Bullets.New();
+            if (Config.MachineGunMode) Bullets.New();
 
             Player.Move();
             Enemies.Move();
             Bullets.Move();
 
-            Line.Draw();
+            if (Config.ShowLine) Line.Draw();
             Bullets.Draw();
             Enemies.Draw();
             Player.Draw();
 
-            LifeBar.Draw();
+            if (Config.ShowLifeBar) LifeBar.Draw();
 
             Text.DisplayedString =
-                " SCORE: " + Player.KilledEnemiesCount + 
-                "\n\n DIRECTION:\n X: " + Line.Direction.X +
-                "\n Y: " + Line.Direction.Y;
+                " YOUR HP: " + Player.HP +
+                "\n SCORE: " + Player.KilledEnemiesCount;
 
             Window.RenderWindow.Draw(Text);
 
